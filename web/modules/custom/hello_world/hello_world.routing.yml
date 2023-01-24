@@ -1,0 +1,15 @@
+hello_world.page:
+  path: /hello
+  defaults:
+    _title: 'Hello World'
+    _controller: 'Drupal\hello_world\Controller\HelloController::hello'
+  requirements:
+    _access: 'TRUE'
+
+hello_world.page_person:
+  path: /hello/{name}
+  defaults:
+    _title: 'Hello World'
+    _controller: 'Drupal\hello_world\Controller\HelloController::hello'
+  requirements:
+    _access: 'TRUE'
