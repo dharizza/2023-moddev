@@ -35,7 +35,7 @@ class HelloController extends ControllerBase {
    * Prints person name and link to node.
    */
   public function helloNameNode($name, $nid) {
-    $node = Node::load($nid);
+    // $node = Node::load($nid);
     // Print node.
     // ksm($node);
 
@@ -50,10 +50,23 @@ class HelloController extends ControllerBase {
     // $link = $node->toLink();
 
     // Build link manually using Url and Link classes.
-    $url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
-    $link = Link::fromTextAndUrl($node->getTitle(), $url);
+    // $url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
+    // $link = Link::fromTextAndUrl($node->getTitle(), $url);
 
-    $output = $this->t("Hi @person! The title of the node is @title", ['@person' => $name, '@title' => $link->toString()]);
+    $output = [];
+    if (is_numeric($nid)) {
+      $node = Node::load($nid);
+      if ($node) {
+        $title = $node->toLink()->toString();
+        $output = $this->t('Hello @name! The title of the node is @title', ['@name' => $name, '@title' => $title]);
+      }
+      else {
+        $output = $this->t('Hey :name! That nid does not exists!', [':name' => $name]);
+      }
+    }
+    else {
+      $output = $this->t('Hey :name! That nid should be a number!', [':name' => $name]);
+    }
 
     return [
       '#type' => 'markup',
