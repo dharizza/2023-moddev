@@ -10,7 +10,20 @@
  * Implements hook_form_alter().
  */
 function hello_world_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if ($form_id === 'node_article_form') {
+  $forms = [
+    'node_page_form',
+    'node_article_form',
+  ];
+  if (in_array($form_id, $forms)) {
     $form['options']['#open'] = TRUE;
   }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Change title of Promotion Options element in node article form.
+ */
+function hello_world_form_node_article_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['options']['#title'] = "Promotion options for articles";
 }
