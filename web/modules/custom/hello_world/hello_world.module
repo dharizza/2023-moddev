@@ -26,4 +26,9 @@ function hello_world_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
  */
 function hello_world_form_node_article_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   $form['options']['#title'] = "Promotion options for articles";
+  $user = \Drupal::currentUser();
+  // $user = \Drupal::service('current_user');
+  $form['field_tags']['#access'] = $user->hasPermission('administer content');
+
+  // $form['field_tags']['#access'] = \Drupal::currentUser()->hasPermission('administer content');
 }
