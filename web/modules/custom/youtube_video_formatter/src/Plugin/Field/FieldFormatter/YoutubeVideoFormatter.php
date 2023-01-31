@@ -24,7 +24,8 @@ class YoutubeVideoFormatter extends FormatterBase {
    */
   public static function defaultSettings() {
     return [
-      'foo' => 'bar',
+      'width' => '',
+      'height' => '',
     ] + parent::defaultSettings();
   }
 
@@ -33,20 +34,29 @@ class YoutubeVideoFormatter extends FormatterBase {
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
 
-    $elements['foo'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Foo'),
-      '#default_value' => $this->getSetting('foo'),
+    $form['width'] = [
+      '#type' => 'number',
+      '#title' => 'Video Width',
+      '#default_value' => $this->getSetting('width'),
+      '#required' => TRUE,
     ];
 
-    return $elements;
+    $form['height'] = [
+      '#type' => 'number',
+      '#title' => 'Video Height',
+      '#default_value' => $this->getSetting('height'),
+      '#required' => TRUE,
+    ];
+
+    return $form;
   }
 
   /**
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary[] = $this->t('Foo: @foo', ['@foo' => $this->getSetting('foo')]);
+    $summary[] = 'The width is ' . $this->getSetting('width');
+    $summary[] = 'The height is ' . $this->getSetting('height');
     return $summary;
   }
 
@@ -54,15 +64,18 @@ class YoutubeVideoFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $element = [];
+    $elements = [];
 
     foreach ($items as $delta => $item) {
-      $element[$delta] = [
-        '#markup' => $item->value,
+      $elements[$delta] = [
+        '#theme' => 'youtube_video',
+        '#youtube_id' => $item->value,
+        '#width' => $this->getSetting('width'),
+        '#height' => $this->getSetting('height'),
       ];
     }
 
-    return $element;
+    return $elements;
   }
 
 }
