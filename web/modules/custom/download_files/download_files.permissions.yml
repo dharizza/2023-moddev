@@ -1,0 +1,8 @@
+administer download_files configuration:
+  title: 'Administer download_files configuration'
+  description: 'Optional description.'
+  restrict access: true
+
+download documents:
+  title: 'Download documents'
+  description: 'Allow users to download files.'
