@@ -1,0 +1,5 @@
+file_types:
+  image/png: image/png
+  image/gif: 0
+  text/plain: 0
+  image/jpeg: 0
