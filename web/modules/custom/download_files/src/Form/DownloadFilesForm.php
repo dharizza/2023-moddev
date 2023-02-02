@@ -52,11 +52,14 @@ class DownloadFilesForm extends FormBase {
    * Get array with list of files.
    */
   public function getFiles() {
+    $config = \Drupal::config('download_files.settings');
+    $values = $config->get('file_types');
     // Get files using database abstraction layer.
     $result = \Drupal::database()
       ->select('file_managed', 'f')
       ->fields('f', ['filename', 'uri'])
       ->condition('f.status', 1)
+      ->condition('f.filemime', $values, 'IN')
       ->execute()
       ->fetchAll();
 
