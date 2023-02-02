@@ -1,0 +1,21 @@
+uuid: 58b9187e-0d46-41d6-97bd-f3509c36884a
+langcode: en
+status: true
+dependencies:
+  module:
+    - download_files
+  theme:
+    - olivero
+id: downloadfilesblock
+theme: olivero
+region: sidebar
+weight: 0
+provider: null
+plugin: download_files_block
+settings:
+  id: download_files_block
+  label: 'Download files block'
+  label_display: visible
+  provider: download_files
+  foo: 'Hello world!'
+visibility: {  }
