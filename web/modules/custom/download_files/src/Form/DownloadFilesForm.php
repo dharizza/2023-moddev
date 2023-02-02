@@ -5,6 +5,7 @@ namespace Drupal\download_files\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * Provides a Download files form.
@@ -91,8 +92,10 @@ class DownloadFilesForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->messenger()->addStatus($this->t('The message has been sent.'));
-    $form_state->setRedirect('<front>');
+    $uri = $form_state->getValue('file');
+    $response = new BinaryFileResponse($uri);
+    $response->setContentDisposition('attachment');
+    $form_state->setResponse($response);
   }
 
 }
