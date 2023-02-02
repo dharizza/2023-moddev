@@ -4,10 +4,13 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - node.type.article
   module:
     - comment
     - contact
     - filter
+    - media
+    - node
     - search
     - shortcut
     - system
@@ -22,7 +25,10 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'create article content'
+  - 'edit own article content'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'
   - 'use text format basic_html'
+  - 'view media'
