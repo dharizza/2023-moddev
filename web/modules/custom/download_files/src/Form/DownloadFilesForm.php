@@ -69,10 +69,10 @@ class DownloadFilesForm extends FormBase {
     // $fids = \Drupal::entityQuery('file')
     //   ->condition('status', 1)
     //   ->execute();
-    // $files = File::loadMultiple($fids);
-    // $options = [];
-    // foreach ($files as $file) {
-    //   $options[$file->getFileUri()] = $file->getFilename();
+    // $items = File::loadMultiple($fids);
+    // $files = [];
+    // foreach ($items as $item) {
+    //   $files[$item->getFileUri()] = $item->getFilename();
     // }
     return $files;
   }
